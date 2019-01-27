@@ -15,8 +15,8 @@ import java.util.Random;
 public class NeuralNetwork {
 	private static final int inputSize = 2;
 
-	private static final int hiddenLayerSize = 500;
-	private static final double learningRate = 0.25;
+	private static final int hiddenLayerSize = 16;
+	private static final double learningRate = 0.05;
 
 	private static final Random r = new Random();
 	private double[][] weightsHL1;
@@ -47,7 +47,7 @@ public class NeuralNetwork {
 			for (int j = 0; j < inputSize; j++) {
 				weightedValue += weightsHL1[i][j] * input[j];
 			}
-			weightedValue += weightsHL2[i][inputSize]; // bias
+			weightedValue += weightsHL1[i][inputSize]; // bias
 
 			hl1[i] = sigmoid(weightedValue);
 		}
@@ -138,7 +138,7 @@ public class NeuralNetwork {
 		weightsO = newWeightsO;
 		weightsHL1 = newWeightsHL1;
 		weightsHL2 = newWeightsHL2;
-		return (expected - output) * (expected - output);
+		return Math.abs(expected - output);
 	}
 
 	private double sigmoid(double value) {
