@@ -15,7 +15,7 @@ import java.util.Random;
 public class NeuralNetwork {
 	private static final int inputSize = 2;
 
-	private static final int hiddenLayerSize = 200;
+	private static final int hiddenLayerSize = 500;
 	private static final double learningRate = 0.25;
 
 	private static final Random r = new Random();
