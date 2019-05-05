@@ -8,13 +8,14 @@ import java.util.Random;
  * Activation function: ReLU
  * 
  * @author GraxCode
+ * @version 2
  */
 public class NeuralNetworkLinear {
-	private static final int inputSize = 2;
+	private static final int inputSize = 1;
 
-	private static final int hiddenLayer1Size = 8;
-	private static final int hiddenLayer2Size = 4;
-	private static final double learningRate = 0.15;
+	private static final int hiddenLayer1Size = 50;
+	private static final int hiddenLayer2Size = 25;
+	private static final double learningRate = 0.001;
 
 	private static final Random r = new Random();
 	public double[][] weightsHL1;
@@ -27,16 +28,15 @@ public class NeuralNetworkLinear {
 		weightsHL1 = new double[hiddenLayer1Size][inputSize + 1]; // and bias
 		weightsHL2 = new double[hiddenLayer2Size + 1][hiddenLayer1Size + 1]; // and bias
 		weightsO = new double[hiddenLayer2Size + 1]; // and bias
-
 		for (int i = 0; i < hiddenLayer1Size; i++) {
 			for (int j = 0; j < inputSize + 1; j++) {
-				weightsHL1[i][j] = r.nextDouble() * 2d - 1;
+				weightsHL1[i][j] = (r.nextDouble() * 2d - 1) * Math.sqrt(2d / (double) (inputSize + 1d));
 			}
 		}
-		for (int i = 0; i < hiddenLayer2Size; i++) {
-			weightsO[i] = r.nextDouble() * 2d - 1;
+		for (int i = 0; i < hiddenLayer2Size + 1; i++) {
+			weightsO[i] = (r.nextDouble() * 2d - 1) *  Math.sqrt(2d / (double) (hiddenLayer2Size + 1d));
 			for (int j = 0; j < hiddenLayer1Size + 1; j++) {
-				weightsHL2[i][j] = r.nextDouble() * 2d - 1;
+				weightsHL2[i][j] = (r.nextDouble() * 2d - 1) * Math.sqrt(2d / (double) (hiddenLayer1Size + 1d));
 			}
 		}
 	}
@@ -156,5 +156,25 @@ public class NeuralNetworkLinear {
 			return alpha;
 		}
 		return 1;
+	}
+
+	public static int getInputSize() {
+		return inputSize;
+	}
+
+	public static int getHiddenLayer1Size() {
+		return hiddenLayer1Size;
+	}
+
+	public static int getHiddenLayer2Size() {
+		return hiddenLayer2Size;
+	}
+
+	public static double getLearningRate() {
+		return learningRate;
+	}
+
+	public static double getAlpha() {
+		return alpha;
 	}
 }

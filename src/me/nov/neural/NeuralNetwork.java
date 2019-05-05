@@ -6,13 +6,14 @@ import java.util.Random;
  * This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version. This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with this program. If not, see <http://www.gnu.org/licenses/>.
  * 
  * @author GraxCode
+ * @version 2
  */
 public class NeuralNetwork {
-	private static final int inputSize = 2;
+	private static final int inputSize = 1;
 
-	private static final int hiddenLayer1Size = 2;
-	private static final int hiddenLayer2Size = 1;
-	private static final double learningRate = 0.15;
+	private static final int hiddenLayer1Size = 50;
+	private static final int hiddenLayer2Size = 25;
+	private static final double learningRate = 0.015;
 
 	private static final Random r = new Random();
 	public double[][] weightsHL1;
@@ -147,4 +148,21 @@ public class NeuralNetwork {
 	private double sigmoid(double value) {
 		return 1d / (1d + Math.exp(-value));
 	}
+
+	public static int getInputSize() {
+		return inputSize;
+	}
+
+	public static int getHiddenLayer1Size() {
+		return hiddenLayer1Size;
+	}
+
+	public static int getHiddenLayer2Size() {
+		return hiddenLayer2Size;
+	}
+
+	public static double getLearningRate() {
+		return learningRate;
+	}
+	
 }
