@@ -5,12 +5,12 @@ import java.util.Random;
 /**
  * This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version. This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with this program. If not, see <http://www.gnu.org/licenses/>.
  * 
- * Activation function: Leaky ReLU
+ * Activation function: ReLU with slope for negative values
  * 
  * @author GraxCode
  * @version 2
  */
-public class NeuralNetworkLinear {
+public class NeuralNetworkELU {
 	private static final int inputSize = 1;
 
 	private static final int hiddenLayer1Size = 20;
@@ -22,9 +22,9 @@ public class NeuralNetworkLinear {
 	public double[][] weightsHL2;
 	public double[] weightsO;
 
-	private static final double alpha = 0.001;
+	private static final double alpha = 0.05;
 
-	public NeuralNetworkLinear() {
+	public NeuralNetworkELU() {
 		weightsHL1 = new double[hiddenLayer1Size][inputSize + 1]; // and bias
 		weightsHL2 = new double[hiddenLayer2Size + 1][hiddenLayer1Size + 1]; // and bias
 		weightsO = new double[hiddenLayer2Size + 1]; // and bias
@@ -148,12 +148,15 @@ public class NeuralNetworkLinear {
 	}
 
 	private double relu(double value) {
-		return Math.max(alpha * value, value);
+		if(value >= 0) {
+			return value;
+		}
+		return alpha * (Math.pow(Math.E, value) - 1);
 	}
 
 	private double reluDerivative(double value) {
 		if (value <= 0) {
-			return alpha;
+			return alpha * (Math.pow(Math.E, value));
 		}
 		return 1;
 	}
