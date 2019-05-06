@@ -155,7 +155,7 @@ public class NeuralNetworkELU {
 	}
 
 	private double reluDerivative(double value) {
-		if (value <= 0) {
+		if (value < 0) {
 			return alpha * (Math.pow(Math.E, value));
 		}
 		return 1;

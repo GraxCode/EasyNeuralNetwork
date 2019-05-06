@@ -14,7 +14,7 @@ public class NeuralNetworkLinear {
 	private static final int inputSize = 1;
 
 	private static final int hiddenLayer1Size = 20;
-	private static final int hiddenLayer2Size = 15;
+	private static final int hiddenLayer2Size = 20;
 	private static final double learningRate = 0.001;
 
 	private static final Random r = new Random();
